@@ -29,16 +29,16 @@ void main() {
                 entrada = readln("Duração: ");
                 double duracao = Double.parseDouble(entrada);
 
-                Musica musica = new Musica(duracao,
-                        autor,
-                        titulo);
+                Musica musica = null;
                 try {
+                    musica = new Musica(duracao,
+                            autor,
+                            titulo);
+
                     boolean retorno = playlist.adicionarMusica(musica);
-                } catch (Exception e) {
-                    println("Falha ao cadastrar música: " + e.getMessage());
+                } catch (IllegalArgumentException e) {
+                    print(e.getMessage());
                 }
-
-
             }
 
             case 2 -> {
@@ -58,7 +58,6 @@ void main() {
 
             default -> {
                 println("Opção informada é inválida, tente novamente");
-                continuarMenu = true;
             }
         }
 
