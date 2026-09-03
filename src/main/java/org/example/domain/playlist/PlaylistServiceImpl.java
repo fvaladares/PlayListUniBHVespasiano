@@ -1,9 +1,7 @@
 package org.example.domain.playlist;
 
-import jdk.jshell.spi.ExecutionControlProvider;
 import org.example.domain.musica.musica.Musica;
 
-import java.lang.classfile.attribute.ExceptionsAttribute;
 import java.util.ArrayList;
 
 /**
@@ -29,20 +27,8 @@ public class PlaylistServiceImpl implements PlaylistService {
 
     // Finalizar a implementação do método
     @Override
-    public boolean adicionarMusica(Musica musica) throws Exception {
-        StringBuilder mensagemExcecao = new StringBuilder();
-        mensagemExcecao.append("Os seguintes campos devem ser preenchidos: ");
-        if (musica == null) {
-            mensagemExcecao.append("Artista, Tĩtulo e duração");
-            throw new Exception(mensagemExcecao.toString());
-        }
-        if (musica.getArtista().isBlank()) {
-            mensagemExcecao.append("Nome artista");
-
-            playlist.add(musica);
-            return true;
-        }
-        return false;
+    public boolean adicionarMusica(Musica musica){
+        return playlist.add(musica);
     }
 
     @Override

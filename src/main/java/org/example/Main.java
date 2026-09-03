@@ -6,53 +6,38 @@ import static java.lang.IO.*;
 
 void main() {
 
-    int opcao = 0;
+    int opcao;
     String entrada;
     boolean continuarMenu = true;
     PlaylistService playlist = new PlaylistServiceImpl();
 
     while (continuarMenu) {
-        println("VibeMusic -- Uma nova forma de consumir suas músicas");
-        println();
-        println("Opções:");
-        println("\t1. Cadastrar nova música");
-        println("\t2. Listar músicas");
-        println("\t3. Apagar músicas por titulo");
+
+        exibirMenu();
         entrada = readln("Informe sua opção: ");
         opcao = Integer.parseInt(entrada);
 
         switch (opcao) {
             case 1 -> {
-                println("Cadastro de nova música");
-                String autor = readln("Autor: ");
-                String titulo = readln("Título: ");
-                entrada = readln("Duração: ");
-                double duracao = Double.parseDouble(entrada);
-
-                Musica musica = new Musica(duracao,
-                        autor,
-                        titulo);
-                try {
-                    boolean retorno = playlist.adicionarMusica(musica);
-                } catch (Exception e) {
-                    println("Falha ao cadastrar música: " + e.getMessage());
-                }
-
-
+                Musica musica = coletarDadosMusica();
+                playlist.adicionarMusica(musica);
             }
 
             case 2 -> {
-                println("Listrar músicas");
+                println();
+                println(".:|Listrar músicas|:.");
             }
 
             case 3 -> {
-                println("Apagar música por título");
+                println();
+                println(".:|Apagar música por título|:.");
 
             }
 
             case 4 -> {
-                println("Saindo do sistema...");
-                println("Até mais...");
+                println();
+                println(".:|Saindo do sistema...|:.");
+                println("Até mais... \uD83D\uDC4B\uD83C\uDFFD");
                 continuarMenu = false;
             }
 
@@ -67,19 +52,29 @@ void main() {
         // solicita ação do usuario
         // switch/case para capturar a escolha.
     }
+}
 
-//
-//    String titulo;
-//    double duracao;
-//
-//
-//    titulo = readln("Informe o titulo da música: ");
-//    entrada = readln("Informe a duração da música: ");
-//
-//    duracao = Double.parseDouble(entrada);
-//
-//
-//    println("O titulo da música é: "
-//            + titulo + " duração " + duracao
-//            + " segundos");
+private Musica coletarDadosMusica() {
+    String entrada;
+    println();
+    println(".:|Cadastro de nova música|:.");
+
+    String autor = readln("Autor: ");
+    String titulo = readln("Título: ");
+    entrada = readln("Duração: ");
+    double duracao = Double.parseDouble(entrada);
+
+    return new Musica(duracao,
+            autor,
+            titulo);
+}
+
+private void exibirMenu() {
+    println("\nVibeMusic -- Uma nova forma de consumir suas músicas \uD83D\uDD0A");
+    println();
+
+    println("Opções:");
+    println("\t1. Cadastrar nova música");
+    println("\t2. Listar músicas");
+    println("\t3. Apagar músicas por titulo");
 }

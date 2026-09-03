@@ -10,7 +10,7 @@ import org.example.domain.musica.musica.Musica;
 
 public interface PlaylistService {
 
-    boolean adicionarMusica(Musica musica) throws Exception;
+    boolean adicionarMusica(Musica musica);
 
     String listarMusicas();
 
