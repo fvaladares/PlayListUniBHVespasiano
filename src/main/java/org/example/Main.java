@@ -1,6 +1,7 @@
 import org.example.domain.musica.musica.Musica;
 import org.example.domain.playlist.PlaylistService;
 import org.example.domain.playlist.PlaylistServiceImpl;
+import org.example.util.ConsoleColor;
 
 import static java.lang.IO.*;
 
@@ -14,7 +15,7 @@ void main() {
     while (continuarMenu) {
 
         exibirMenu();
-        entrada = readln("Informe sua opção: ");
+        entrada = readln(ConsoleColor.BLUE + "Informe sua opção: " + ConsoleColor.RESET);
         opcao = Integer.parseInt(entrada);
 
         switch (opcao) {
@@ -42,7 +43,9 @@ void main() {
             }
 
             default -> {
-                println("Opção informada é inválida, tente novamente");
+                println(ConsoleColor.BOLD_RED +
+                        "\n\nOpção informada é inválida, tente novamente" +
+                        ConsoleColor.RESET);
                 continuarMenu = true;
             }
         }
@@ -61,7 +64,7 @@ private Musica coletarDadosMusica() {
 
     String autor = readln("Autor: ");
     String titulo = readln("Título: ");
-    entrada = readln("Duração: ");
+    entrada = readln("Duração em segundos: ");
     double duracao = Double.parseDouble(entrada);
 
     return new Musica(duracao,
@@ -70,11 +73,14 @@ private Musica coletarDadosMusica() {
 }
 
 private void exibirMenu() {
-    println("\nVibeMusic -- Uma nova forma de consumir suas músicas \uD83D\uDD0A");
+    println(ConsoleColor.BOLD_BLUE +
+            "\nVibeMusic -- Uma nova forma de consumir suas músicas \uD83D\uDD0A" +
+            ConsoleColor.RESET);
     println();
 
     println("Opções:");
     println("\t1. Cadastrar nova música");
     println("\t2. Listar músicas");
     println("\t3. Apagar músicas por titulo");
+    println("\t4. Sair");
 }
