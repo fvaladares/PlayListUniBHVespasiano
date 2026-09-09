@@ -12,6 +12,9 @@ public class Musica {
     public Musica(double duracao,
                   String titulo,
                   String artista) {
+
+        this.validarDadosMusica(duracao, titulo, artista);
+
         this.duracao = duracao;
         this.titulo = titulo;
         this.artista = artista;
@@ -27,5 +30,21 @@ public class Musica {
 
     public String getArtista() {
         return artista;
+    }
+
+    private void validarDadosMusica(double duracao,
+                                    String titulo,
+                                    String artista) throws IllegalArgumentException {
+        if (duracao <= 0 || titulo.isBlank() || artista.isBlank())
+            throw new IllegalArgumentException("Atenção, verifique os dados preenchidos: " +
+                    "\n\tOs campos autor e título são obrigatórios, o tempo deve ser maior do que zero.");
+
+    }
+
+    @Override
+    public String toString() {
+        return "Artista= '" + artista + '\'' +
+                ", Título= '" + titulo + '\'' +
+                ", Duração= " + duracao + ";\n";
     }
 }

@@ -27,17 +27,43 @@ public class PlaylistServiceImpl implements PlaylistService {
 
     // Finalizar a implementação do método
     @Override
-    public boolean adicionarMusica(Musica musica){
-        return playlist.add(musica);
+    public boolean adicionarMusica(Musica musica) {
+        return this.playlist.add(musica);
     }
 
     @Override
     public String listarMusicas() {
-        return "";
+        StringBuilder listaDeMusicas = new StringBuilder();
+        double tempoTotal = 0;
+
+        if (!this.playlist.isEmpty()) {
+
+            for (Musica musica : this.playlist) {
+                listaDeMusicas.append(musica.toString());
+                tempoTotal += musica.getDuracao();
+            }
+
+            listaDeMusicas.append("\nTempo total: ").append(tempoTotal);
+        } else {
+            listaDeMusicas.append("A lista de músicas está vazia");
+        }
+
+
+        return listaDeMusicas.toString();
     }
 
     @Override
     public boolean removerMusica(String titulo) {
-        return false;
+        Musica musica = null;
+        for (Musica m : playlist) {
+            if (m.getTitulo().equalsIgnoreCase(titulo)) {
+                musica = m;
+                break;
+            }
+        }
+        if (musica != null) {
+            return this.playlist.remove(musica);
+        } else
+            return false;
     }
 }

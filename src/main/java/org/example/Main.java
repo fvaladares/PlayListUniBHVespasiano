@@ -20,18 +20,45 @@ void main() {
 
         switch (opcao) {
             case 1 -> {
-                Musica musica = coletarDadosMusica();
-                playlist.adicionarMusica(musica);
+                Musica musica = null;
+                musica = coletarDadosMusica();
+                try {
+                    musica = new Musica(duracao,
+                            titulo,
+                            autor);
+
+                    boolean retorno = playlist.adicionarMusica(musica);
+
+                    if (retorno) {
+                        print("Música adicionada com sucesso.\n\n");
+                    } else {
+                        print("Houve uma falha ao adicionar a música, tente novamente mais tarde\n\n");
+                    }
+
+                } catch (IllegalArgumentException e) {
+                    print(e.getMessage());
+                }
             }
 
             case 2 -> {
+                println("Listrar músicas");
+                String listaDeMusicas = playlist.listarMusicas();
                 println();
-                println(".:|Listrar músicas|:.");
+                println(listaDeMusicas);
             }
 
             case 3 -> {
-                println();
-                println(".:|Apagar música por título|:.");
+                println("Apagar música por título");
+                String titulo = readln("Informe o título da música que deseja remover: ");
+                boolean isRemovido = playlist.removerMusica(titulo);
+
+                if(isRemovido) {
+                    println();
+                    println(titulo + " removida com sucesso.");
+                } else {
+                    println();
+                    print(titulo + "Não consta da lista.");
+                }
 
             }
 
