@@ -21,12 +21,9 @@ void main() {
         switch (opcao) {
             case 1 -> {
                 Musica musica = null;
-                musica = coletarDadosMusica();
-                try {
-                    musica = new Musica(duracao,
-                            titulo,
-                            autor);
 
+                try {
+                    musica = coletarDadosMusica();
                     boolean retorno = playlist.adicionarMusica(musica);
 
                     if (retorno) {
@@ -69,18 +66,10 @@ void main() {
                 continuarMenu = false;
             }
 
-            default -> {
-                println(ConsoleColor.BOLD_RED +
-                        "\n\nOpção informada é inválida, tente novamente" +
-                        ConsoleColor.RESET);
-                continuarMenu = true;
-            }
+            default -> println(ConsoleColor.BOLD_RED +
+                    "\n\nOpção informada é inválida, tente novamente" +
+                    ConsoleColor.RESET);
         }
-
-
-        // mostrar menu
-        // solicita ação do usuario
-        // switch/case para capturar a escolha.
     }
 }
 
