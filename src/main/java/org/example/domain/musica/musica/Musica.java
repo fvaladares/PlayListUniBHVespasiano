@@ -35,9 +35,16 @@ public class Musica {
     private void validarDadosMusica(double duracao,
                                     String titulo,
                                     String artista) throws IllegalArgumentException {
-        if (duracao <= 0 || titulo == null || artista == null)
+        if (duracao <= 0 || titulo.isBlank() || artista.isBlank())
             throw new IllegalArgumentException("Atenção, verifique os dados preenchidos: " +
                     "\n\tOs campos autor e título são obrigatórios, o tempo deve ser maior do que zero.");
 
+    }
+
+    @Override
+    public String toString() {
+        return "Artista= '" + artista + '\'' +
+                ", Título= '" + titulo + '\'' +
+                ", Duração= " + duracao + ";\n";
     }
 }
