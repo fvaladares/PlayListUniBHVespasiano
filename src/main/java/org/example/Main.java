@@ -45,6 +45,7 @@ void main() {
             }
 
             case 3 -> {
+                println();
                 println("Apagar música por título");
                 String titulo = readln("Informe o título da música que deseja remover: ");
                 boolean isRemovido = playlist.removerMusica(titulo);

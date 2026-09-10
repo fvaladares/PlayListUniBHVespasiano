@@ -1,6 +1,8 @@
 package org.example.domain.playlist;
 
 import org.example.domain.musica.musica.Musica;
+import org.example.infrastructure.persistencia.MemoriaPlaylistRepositoryImpl;
+import org.example.infrastructure.persistencia.PlaylistRepository;
 
 import java.util.ArrayList;
 
@@ -39,7 +41,7 @@ public class PlaylistServiceImpl implements PlaylistService {
         if (!this.playlist.isEmpty()) {
 
             for (Musica musica : this.playlist) {
-                listaDeMusicas.append(musica.toString());
+                listaDeMusicas.append(musica);
                 tempoTotal += musica.getDuracao();
             }
 
