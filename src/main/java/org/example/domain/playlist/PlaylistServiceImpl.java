@@ -4,8 +4,6 @@ import org.example.domain.musica.musica.Musica;
 import org.example.infrastructure.persistencia.MemoriaPlaylistRepositoryImpl;
 import org.example.infrastructure.persistencia.PlaylistRepository;
 
-import java.util.ArrayList;
-
 /**
  * Classe concerta da regra de negócio (Playlist)
  * Ela implementa a interface PlaylistService,
@@ -14,11 +12,11 @@ import java.util.ArrayList;
  */
 
 public class PlaylistServiceImpl implements PlaylistService {
-    private ArrayList<Musica> playlist;
+    private PlaylistRepository playlist;
 
 
     public PlaylistServiceImpl() {
-        this.playlist = new ArrayList<>();
+        this.playlist = new MemoriaPlaylistRepositoryImpl();
     }
 
     /**
@@ -30,42 +28,18 @@ public class PlaylistServiceImpl implements PlaylistService {
     // Finalizar a implementação do método
     @Override
     public boolean adicionarMusica(Musica musica) {
-        return this.playlist.add(musica);
+        return this.playlist.inserirMusica(musica);
     }
 
     @Override
     public String listarMusicas() {
-        StringBuilder listaDeMusicas = new StringBuilder();
-        double tempoTotal = 0;
+        String listaDeMusicas = playlist.listarMusicas();
 
-        if (!this.playlist.isEmpty()) {
-
-            for (Musica musica : this.playlist) {
-                listaDeMusicas.append(musica);
-                tempoTotal += musica.getDuracao();
-            }
-
-            listaDeMusicas.append("\nTempo total: ").append(tempoTotal);
-        } else {
-            listaDeMusicas.append("A lista de músicas está vazia");
-        }
-
-
-        return listaDeMusicas.toString();
+        return listaDeMusicas;
     }
 
     @Override
     public boolean removerMusica(String titulo) {
-        Musica musica = null;
-        for (Musica m : playlist) {
-            if (m.getTitulo().equalsIgnoreCase(titulo)) {
-                musica = m;
-                break;
-            }
-        }
-        if (musica != null) {
-            return this.playlist.remove(musica);
-        } else
-            return false;
+        return playlist.excluirMusicaPorTitulo(titulo);
     }
 }

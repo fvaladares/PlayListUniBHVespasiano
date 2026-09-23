@@ -20,7 +20,7 @@ void main() {
 
         switch (opcao) {
             case 1 -> {
-                Musica musica = null;
+                Musica musica;
 
                 try {
                     musica = coletarDadosMusica();
@@ -82,11 +82,17 @@ private Musica coletarDadosMusica() {
     String autor = readln("Autor: ");
     String titulo = readln("Título: ");
     entrada = readln("Duração em segundos: ");
+
+    while(entrada.isBlank() || !isNumeric(entrada)){
+        println("O campo duração aceita apenas valores numéricos");
+        entrada = readln("Duração em segundos: ");
+    }
+
     double duracao = Double.parseDouble(entrada);
 
     return new Musica(duracao,
-            autor,
-            titulo);
+            titulo,
+            autor);
 }
 
 private void exibirMenu() {
@@ -100,4 +106,16 @@ private void exibirMenu() {
     println("\t2. Listar músicas");
     println("\t3. Apagar músicas por titulo");
     println("\t4. Sair");
+}
+
+public boolean isNumeric(String strNum) {
+    if (strNum == null) {
+        return false;
+    }
+    try {
+        Double.parseDouble(strNum);
+    } catch (NumberFormatException nfe) {
+        return false;
+    }
+    return true;
 }
