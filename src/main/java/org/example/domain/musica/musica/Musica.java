@@ -35,7 +35,7 @@ public class Musica {
     private void validarDadosMusica(double duracao,
                                     String titulo,
                                     String artista) throws IllegalArgumentException {
-        if (duracao <= 0 || titulo.isBlank() || artista.isBlank())
+        if (duracao <= 0 || titulo == null || titulo.isBlank() || artista == null || artista.isBlank())
             throw new IllegalArgumentException("Atenção, verifique os dados preenchidos: " +
                     "\n\tOs campos autor e título são obrigatórios, o tempo deve ser maior do que zero.");
 

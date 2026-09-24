@@ -39,13 +39,17 @@ public class PlaylistServiceImpl implements PlaylistService {
         double tempoTotal = 0;
 
         if (!this.playlist.isEmpty()) {
-
-            for (Musica musica : this.playlist) {
-                listaDeMusicas.append(musica);
+            for (int i = 0; i < playlist.size(); i++) {
+                Musica musica = playlist.get(i);
+                listaDeMusicas.append(String.format("%d. %s - %s (%d seg)%n",
+                        i + 1,
+                        musica.getTitulo(),
+                        musica.getArtista(),
+                        (int) musica.getDuracao()));
                 tempoTotal += musica.getDuracao();
             }
 
-            listaDeMusicas.append("\nTempo total: ").append(tempoTotal);
+            listaDeMusicas.append(String.format("%nTempo total: %d seg", (int) tempoTotal));
         } else {
             listaDeMusicas.append("A lista de músicas está vazia");
         }

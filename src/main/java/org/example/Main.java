@@ -55,7 +55,7 @@ void main() {
                     println(titulo + " removida com sucesso.");
                 } else {
                     println();
-                    print(titulo + "Não consta da lista.");
+                    print(titulo + " Não consta da lista.");
                 }
 
             }
@@ -79,14 +79,24 @@ private Musica coletarDadosMusica() {
     println();
     println(".:|Cadastro de nova música|:.");
 
-    String autor = readln("Autor: ");
+    String artista = readln("Autor: ");
     String titulo = readln("Título: ");
     entrada = readln("Duração em segundos: ");
-    double duracao = Double.parseDouble(entrada);
+    if (entrada == null || entrada.isBlank()) {
+        throw new IllegalArgumentException("Atenção, verifique os dados preenchidos: " +
+                "\n\tOs campos autor e título são obrigatórios, o tempo deve ser maior do que zero.");
+    }
+    double duracao;
+    try {
+        duracao = Double.parseDouble(entrada.trim());
+    } catch (NumberFormatException e) {
+        throw new IllegalArgumentException("Atenção, verifique os dados preenchidos: " +
+                "\n\tOs campos autor e título são obrigatórios, o tempo deve ser maior do que zero.");
+    }
 
     return new Musica(duracao,
-            autor,
-            titulo);
+            titulo,
+            artista);
 }
 
 private void exibirMenu() {
